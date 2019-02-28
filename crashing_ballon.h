@@ -13,7 +13,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define PRINT_FLAG 1
 #define CRASH_MAX_CNT 100
 typedef struct {
     int data[CRASH_MAX_CNT];
