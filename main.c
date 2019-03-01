@@ -15,6 +15,8 @@
 #include "crashing_ballon.h"
 #include "anagrams_by_stack.h"
 #include "jugs.h"
+#include "do_the_untwist.h"
+#include "numberical_summation.h"
 
 void problemFactory(const int type) {
     switch (type) {
@@ -23,12 +25,22 @@ void problemFactory(const int type) {
             break;
         case 2:
             html();
+            break;
         case 3:
             crashing_ballon();
+            break;
         case 4:
             anagrams_by_stack();
+            break;
         case 5:
             jugs();
+            break;
+        case 6:
+            do_the_untwist();
+            break;
+        case 7:
+            numberical_summation();
+            break;
         default:
             break;
     }
@@ -36,6 +48,6 @@ void problemFactory(const int type) {
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    problemFactory(5);
+    problemFactory(7);
     return 0;
 }
