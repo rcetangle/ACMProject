@@ -13,12 +13,12 @@
 #include <string.h>
 #include <stdlib.h>
 
-int validCode(const int a, const int b) {
-    return a >= 0 && a < 28? a : b;
+int calculateMod(const int code) {
+    return code < 0? (code+28)%28 : code%28;
 }
 
 int calculatePlainCode(const int cipherCode, const int idx) {
-    return validCode((cipherCode - 28)+idx, cipherCode+idx);
+    return calculateMod(cipherCode + idx);
 }
 
 char getCharFromCode(const int c) {
@@ -29,6 +29,9 @@ char getCharFromCode(const int c) {
             break;
         case 27:
             ret = 46;
+            break;
+        case -1:
+            ret = '\0';
             break;
         default:
             ret = c+96;
@@ -53,11 +56,38 @@ int getCodeFromChar(const char c) {
     return ret;
 }
 
+void encrypt2Twist() {
+    printf("please input an int(0~300) and a plainText(1~70 characters):\n");
+    int key = 1;
+    scanf("%d", &key);
+    char plainText[MAX_CNT];
+    scanf("%s", plainText);
+    int n = 0;
+    int plainCode[MAX_CNT];
+    while(plainText[n] != '\0') {
+        plainCode[n] = getCodeFromChar(plainText[n]);
+        n++;
+    }
+    
+    int* cipherCode = (int*)malloc(sizeof(int)*n);
+    memset(cipherCode, -1, sizeof(int)*n);
+    int i;
+    for (i = 0; i < n; i++) {
+        cipherCode[i] = calculateMod(plainCode[(i*key)%n] - i);
+    }
+    printf("%d ", key);
+    for (i = 0; i < n; i++) {
+        printf("%c", getCharFromCode(cipherCode[i]));
+    }
+    printf("\n");
+    free(cipherCode);
+    cipherCode = NULL;
+}
+
 void do_the_untwist() {
 #ifdef PRINT_FLAG
     printf("problem do the untwist problemCode=1006\n");
     printf("please input an int(0~300) and a ciphertext(1~70 characters):\n");
-    
     /* init plainCode */
     int i = 0;
     printf("text: ");
@@ -67,11 +97,12 @@ void do_the_untwist() {
     printf("\n");
 #endif
     while(1) {
+        encrypt2Twist();
         int key = 1;
         scanf("%d", &key);
         if (key == 0) break;
         char cipherText[MAX_CNT];
-        scanf(" %s", cipherText);
+        scanf("%s", cipherText);
         
         /* get cipherCodes */
         int n = 0;
@@ -87,6 +118,13 @@ void do_the_untwist() {
         for (i = 0; i < n; i++) {
             plainIdx[i] = (key*i)%n;
         }
+        
+        /* get plainCode */
+        int* plainCode = (int*)malloc(sizeof(int)*n);
+        memset(plainCode, -1, sizeof(int)*n);
+        for (i = 0; i < n; i++) {
+            plainCode[plainIdx[i]] = calculatePlainCode(cipherCode[i], i);
+        }
     
 #ifdef PRINT_FLAG
         printf("       idx: ");
@@ -101,13 +139,6 @@ void do_the_untwist() {
         for (i = 0; i < n; i++) {
             printf("%d\t", plainIdx[i]);
         }
-#endif
-        int* plainCode = (int*)malloc(sizeof(int)*n);
-        memset(plainCode, -1, sizeof(int)*n);
-        for (i = 0; i < n; i++) {
-            plainCode[plainIdx[i]] = calculatePlainCode(cipherCode[i], i);
-        }
-#ifdef PRINT_FLAG
         printf("\n plainCode: ");
         for (i = 0; i < n; i++) {
             printf("%d\t", plainCode[i]);
@@ -117,50 +148,21 @@ void do_the_untwist() {
             printf("%c\t", getCharFromCode(plainCode[i]));
         }
         printf("\n");
-#else
-        for (i = 0; i < n; i++) {
-            printf("%c", getCharFromCode(plainCode[i]));
-        }
-        printf("\n");
 #endif
+        
+        char* plainText = (char*)malloc(sizeof(char)*(n+1));
+        for (i = 0; i < n; i++) {
+            plainText[i] = getCharFromCode(plainCode[i]);
+        }
+        plainText[n] = '\0';
+        printf("%s\n", plainText);
         free(plainIdx);
         plainIdx = NULL;
         free(plainCode);
         plainCode = NULL;
+        free(plainText);
+        plainText = NULL;
     }
-}
-
-int calculateCipherCode(const int code) {
-    return code < 0? (code+28)%28 : code%28;
-}
-
-void encrypt2Twist() {
-    printf("please input an int(0~300) and a plainText(1~70 characters):\n");
-    int key = 1;
-    scanf("%d", &key);
-    char plainText[MAX_CNT];
-    scanf(" %s", plainText);
-    int n = 0;
-    int plainCode[MAX_CNT];
-    while(plainText[n] != '\0') {
-        plainCode[n] = getCodeFromChar(plainText[n]);
-        n++;
-    }
-    
-    int* cipherCode = (int*)malloc(sizeof(int)*n);
-    memset(cipherCode, -1, sizeof(int)*n);
-    int i;
-    for (i = 0; i < n; i++) {
-        cipherCode[i] = calculateCipherCode(plainCode[(i*key)%n] - i);
-        printf("%d ", cipherCode[i]);
-    }
-    printf("\n");
-    for (i = 0; i < n; i++) {
-        printf("%c", getCharFromCode(cipherCode[i]));
-    }
-    printf("\n");
-    free(cipherCode);
-    cipherCode = NULL;
 }
 
 #endif /* do_the_untwist_h */
