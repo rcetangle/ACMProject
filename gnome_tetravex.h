@@ -9,6 +9,49 @@
 #ifndef gnome_tetravex_h
 #define gnome_tetravex_h
 
+typedef struct square {
+    int datas[4]; /* top right bottom left*/
+    struct square* adjoins[4]; /* top right bottom left*/
+} Square;
+
+void printSquares(Square** squares, const int n) {
+#ifdef PRINT_FLAG
+    printf("\n---------- square ----------\n");
+    int i, j;
+    for (j = 0; j < n; j++) {
+        for (i = 0; i < n; i++) {
+            printf("|\t%d\t | ", squares[i+j*n]->datas[0]);
+        }
+        printf("\n");
+        for (i = 0; i < n; i++) {
+            printf("|%d\t\t%d| ", squares[i+j*n]->datas[3], squares[i+j*n]->datas[1]);
+        }
+        printf("\n");
+        for (i = 0; i < n; i++) {
+            printf("|\t%d\t | ", squares[i+j*n]->datas[2]);
+        }
+        printf("\n\n");
+    }
+#endif
+}
+
+void findSquares(Square** squares, const int n) {
+    int i = 0;
+    Square* sq = squares[0];
+    for (i = 1; i < n*n; i++) {
+        Square* sq2 = squares[i];
+        if (sq->adjoins[0] == NULL && sq->datas[0] == sq2->datas[2]) { /* sq2在sq1s上边 */
+            sq->adjoins[0] = sq2;
+        } else if (sq->adjoins[1] == NULL && sq->datas[1] == sq2->datas[3]) { /* sq2在sq1右边 */
+            sq->adjoins[1] = sq2;
+        } else if (sq->adjoins[2] == NULL && sq->datas[2] == sq2->datas[0]) { /* sq2在sq1s下边 */
+            sq->adjoins[2] = sq2;
+        }  else if (sq->adjoins[3] == NULL && sq->datas[3] == sq2->datas[1]) { /* sq2在sq1右边 */
+            sq->adjoins[3] = sq2;
+        }
+    }
+}
+
 void gnome_tetravex() {
 #ifdef PRINT_FLAG
     printf("problem gnome tetravex problemCode=1008\n");
@@ -18,39 +61,28 @@ void gnome_tetravex() {
         int n = 1;
         scanf("%d", &n);
         if (n == 0) break;
-        int cnt = n*n*4;
-        int* square = (int*)malloc(sizeof(int)*cnt);
-        memset(square, -1, sizeof(int)*cnt);
+        Square** squares = (Square**)malloc(sizeof(Square*)*n*n);
 #ifdef PRINT_FLAG
-        printf("input %d ints(0~9) for triangles:\n", cnt);
+        printf("input %d ints(0~9) for triangles:\n", n*n*4);
 #endif
-        int i = 0;
-        while (i < cnt) {
-            scanf("%d", &square[i]);
-            i++;
+        int i, j;
+        for (i = 0; i < n; i++) {
+            for (j = 0; j < n; j++) {
+                Square* sq = (Square*)malloc(sizeof(Square));
+                int k;
+                for (k = 0; k < 4; k++)
+                    sq->adjoins[k] = NULL;
+                scanf("%d %d %d %d", &sq->datas[0], &sq->datas[1], &sq->datas[2], &sq->datas[3]);
+                squares[i*n+j] = sq;
+            }
         }
-#ifdef PRINT_FLAG
-        printf("\n---------- square ----------\n");
-        int j;
-        for (i = 0; i < n*n;) {
-            /* top */
-            for (j = 0; j < n; j++) {
-                printf("|\t%d\t | ", square[(i/n)*(n*4)+j*4]);
-            }
-            printf("\n");
-            /* left & right*/
-            for (j = 0; j < n; j++) {
-                printf("|%d\t\t%d| ", square[(i/n)*(n*4)+j*4+3], square[(i/n)*(n*4)+j*4+1]);
-            }
-            printf("\n");
-            /* bottom */
-            for (j = 0; j < n; j++) {
-                printf("|\t%d\t | ", square[(i/n)*(n*4)+j*4+2]);
-            }
-            printf("\n\n");
-            i += n;
-        }
-#endif
+        printSquares(squares, n);
+        
+        findSquares(squares, n);
+//        horizentalSwap(squares, n*n);
+//        printSquares(squares, n);
+//        verticalSwap(squares, n*n);
+//        printSquares(squares, n);
     }
 }
 #endif /* gnome_tetravex_h */
