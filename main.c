@@ -17,6 +17,8 @@
 #include "jugs.h"
 #include "do_the_untwist.h"
 #include "numberical_summation.h"
+#include "gnome_tetravex.h"
+#include "system_overload.h"
 
 void problemFactory(const int type) {
     switch (type) {
@@ -30,7 +32,7 @@ void problemFactory(const int type) {
             crashing_ballon();
             break;
         case 4:
-            anagrams_by_stack();
+            anagrams_by_stack(); // unfinished yet
             break;
         case 5:
             jugs();
@@ -41,13 +43,20 @@ void problemFactory(const int type) {
         case 7:
             numberical_summation();
             break;
+        case 8:
+            gnome_tetravex(); // unfinished yet
+            break;
+        case 9:
+            system_overload();
+            break;
         default:
+            system_overload();
             break;
     }
 }
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    problemFactory(7);
+    problemFactory(3000);
     return 0;
 }
