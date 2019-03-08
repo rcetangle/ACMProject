@@ -9,13 +9,13 @@
 #ifndef fire_net_h
 #define fire_net_h
 
-void printBoard(int* board, const int n) {
+void printBoard(char* board, const int n) {
 #ifdef PRINT_FLAG
     printf("---------\n");
     int i, j;
     for (i = 0; i < n; i++) {
         for (j = 0; j < n; j++) {
-            printf("%d ", board[i*n+j]);
+            printf("%c", board[i*n+j]);
         }
         printf("\n");
     }
@@ -23,25 +23,36 @@ void printBoard(int* board, const int n) {
 #endif
 }
 
-void setBlockhouse(int* space) {
-    *space = 2;
+void setBlockhouse(char* space) {
+    *space = 'O';
 }
 
-void clearBlockhouse(int* space) {
-    *space = 0;
+void clearBlockhouse(char* space) {
+    *space = '.';
 }
 
-int checkVertical(int* board, const int n, int row, int col) {
-    if (row < 0 || board[row*n+col] == 1) return 1;
-    if (board[row*n+col] == 2) {
+int isBlockhouse(const char space) {
+    return space == 'O'? 1 : 0;
+}
+
+int isWall(const char space) {
+    return space == 'X'? 1 : 0;
+}
+
+int isEmpty(const char space) {
+    return space == '.'? 1 : 0;
+}
+
+int checkVertical(char* board, const int n, int row, int col) {
+    if (row < 0 || isWall(board[row*n+col])) return 1;
+    if (isBlockhouse(board[row*n+col])) {
         int i;
         for (i = col+1; i < n; i++) {
-            if (board[row*n+i] == 0 && 1 == checkVertical(board, n, row-1, i)) {
+            if (isEmpty(board[row*n+i]) && checkVertical(board, n, row-1, i)) {
                 clearBlockhouse(&board[row*n+col]);
-//                printf("%d %d setBlock\n", row, i);
                 setBlockhouse(&board[row*n+i]);
                 return 1;
-            } else if (board[row*n+i] == 2) {
+            } else if (isBlockhouse(board[row*n+i])) {
                 i = n-1;
             }
         }
@@ -50,31 +61,29 @@ int checkVertical(int* board, const int n, int row, int col) {
     return checkVertical(board, n, row-1, col);
 }
 
-void traversalBoard(int* board, const int n) {
+void searchBoard(char* board, const int n) {
     int i, j;
     for (i = 0; i < n; i++) {
-        int noCastle = 1;
+        int noBlockhouse = 1;
         for (j = 0; j < n; j++) {
-            if (board[i*n+j] == 0 && noCastle == 1) {
-                if (1 == checkVertical(board, n, i-1, j)) {
-//                    printf("%d %d setBlock2s\n", i, j);
+            if (isEmpty(board[i*n+j]) && noBlockhouse == 1) {
+                if (checkVertical(board, n, i-1, j)) {
                     setBlockhouse(&board[i*n+j]);
-                    noCastle = 0;
+                    noBlockhouse = 0;
                 }
-            }
-            if (board[i*n+j] == 1) {
-                noCastle = 1;
+            } else if (isWall(board[i*n+j])) {
+                noBlockhouse = 1;
             }
         }
     }
 }
 
-void calculateBoard(int* board, const int n) {
+void calculateBoard(char* board, const int n) {
     int ret = 0;
     int i, j;
     for (i = 0; i < n; i++) {
         for (j = 0; j < n; j++) {
-            if (board[i*n+j] == 2) {
+            if (board[i*n+j] == 'O') {
                 ret++;
             }
         }
@@ -92,24 +101,19 @@ void fire_net() {
         scanf("%d", &n);
         scanf("%*c"); // flush
         if (n == 0) break;
-        int* board = (int*)malloc(sizeof(int)*n*n);
-        memset(board, 0, sizeof(int)*n*n);
+        char* board = (char*)malloc(sizeof(char)*n*n);
+        memset(board, '.', sizeof(char)*n*n);
 #ifdef PRINT_FLAG
         printf("please input %d '.'(indicating an open space) or 'X'(indicating a wall) to set up the map:\n", n*n);
 #endif
         int i, j;
-        char tmp;
         for (i = 0; i < n; i++) {
             for (j = 0; j < n; j++) {
-                scanf("%c", &tmp);
-                if (tmp == 'X') {
-                    board[i*n+j] = 1;
-                }
+                scanf("%c", &board[i*n+j]);
             }
             scanf("%*c"); // flush
         }
-        printBoard(board, n);
-        traversalBoard(board, n);
+        searchBoard(board, n);
         printBoard(board, n);
         calculateBoard(board, n);
         free(board);
