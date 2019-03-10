@@ -12,7 +12,7 @@
 #include "main.h"
 #include "a_plus_b.h"
 #include "html.h"
-//#include "crashing_ballon.h"
+#include "crashing_ballon.h"
 // #include "anagrams_by_stack.h"
 #include "jugs.h"
 #include "do_the_untwist.h"
@@ -30,7 +30,7 @@ void problemFactory(const int type) {
             html();
             break;
         case 3:
-            //crashing_ballon();
+            crashing_ballon();
             break;
         case 4:
             //anagrams_by_stack(); // unfinished yet
@@ -59,7 +59,6 @@ void problemFactory(const int type) {
 }
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
     problemFactory(3000);
     return 0;
 }

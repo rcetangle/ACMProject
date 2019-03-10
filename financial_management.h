@@ -31,7 +31,6 @@ void financial_management() {
         ret += inputs[i];
     }
     printf("$%.2f", ret/max);
-    while(scanf("%f", &ret) != EOF);
 }
 
 #endif /* financial_management */
