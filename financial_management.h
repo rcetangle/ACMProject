@@ -14,22 +14,24 @@
 #include <stdlib.h>
 
 void financial_management() {
+    const int max = 12;
 #ifdef PRINT_FLAG
     printf("problem Financial Management problemCode=1048\n");
-    printf("please input an int:\n");
+    printf("please input %d floats:\n", max);
 #endif
-    double* inputs = (double*)malloc(sizeof(double)*12);
-    memset(inputs, 0, sizeof(double)*12);
+    float* inputs = (float*)malloc(sizeof(float)*max);
+    memset(inputs, 0, sizeof(float)*max);
     int i;
-    for (i = 0; i < 12; i++) {
-        scanf("%.2f\n", inputs[i]);
+    for (i = 0; i < max; i++) {
+        scanf("%f", inputs+i);
     }
 
-    double ret = 0;
-    for (i = 0; i < 12; i++) {
+    float ret = 0.0;
+    for (i = 0; i < max; i++) {
         ret += inputs[i];
     }
-    printf("$%.2f", ret/12);
+    printf("$%.2f", ret/max);
+    while(scanf("%f", &ret) != EOF);
 }
 
 #endif /* financial_management */
