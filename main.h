@@ -9,6 +9,6 @@
 #ifndef main_h
 #define main_h
 
-//#define PRINT_FLAG 1
+#define PRINT_FLAG 1
 
 #endif /* main_h */

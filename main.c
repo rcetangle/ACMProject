@@ -12,13 +12,14 @@
 #include "main.h"
 #include "a_plus_b.h"
 #include "html.h"
-#include "crashing_ballon.h"
-#include "anagrams_by_stack.h"
+//#include "crashing_ballon.h"
+// #include "anagrams_by_stack.h"
 #include "jugs.h"
 #include "do_the_untwist.h"
 #include "numberical_summation.h"
 #include "gnome_tetravex.h"
 #include "system_overload.h"
+#include "financial_management.h"
 
 void problemFactory(const int type) {
     switch (type) {
@@ -29,10 +30,10 @@ void problemFactory(const int type) {
             html();
             break;
         case 3:
-            crashing_ballon();
+            //crashing_ballon();
             break;
         case 4:
-            anagrams_by_stack(); // unfinished yet
+            //anagrams_by_stack(); // unfinished yet
             break;
         case 5:
             jugs();
@@ -49,8 +50,10 @@ void problemFactory(const int type) {
         case 9:
             system_overload();
             break;
+        case 10:
+            financial_management();
         default:
-            system_overload();
+            financial_management();
             break;
     }
 }
