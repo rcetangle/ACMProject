@@ -18,6 +18,13 @@
 #include "do_the_untwist.h"
 #include "numberical_summation.h"
 #include "gnome_tetravex.h"
+#include "system_overload.h"
+#include "trees_made_2_order.h"
+#include "fire_net.h"
+#include "houseboat.h"
+#include "hangover.h"
+#include "undercut.h"
+#include "enigma.h"
 
 void problemFactory(const int type) {
     switch (type) {
@@ -31,7 +38,7 @@ void problemFactory(const int type) {
             crashing_ballon();
             break;
         case 4:
-            anagrams_by_stack();
+            anagrams_by_stack(); // unfinished yet
             break;
         case 5:
             jugs();
@@ -43,15 +50,37 @@ void problemFactory(const int type) {
             numberical_summation();
             break;
         case 8:
-            gnome_tetravex();
+            gnome_tetravex(); // unfinished yet
+            break;
+        case 9:
+            system_overload();
+            break;
+        case 10:
+            trees_made_2_order(); // unfinished yet
+            break;
+        case 11:
+            fire_net();
+            break;
+        case 12:
+            houseboat();
+            break;
+        case 13:
+            hangover();
+            break;
+        case 14:
+            undercut();
+            break;
+        case 15:
+            enigma();
             break;
         default:
+            enigma();
             break;
     }
 }
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    problemFactory(8);
+    problemFactory(3000);
     return 0;
 }
