@@ -25,6 +25,10 @@
 #include "hangover.h"
 #include "undercut.h"
 #include "enigma.h"
+#include "gridland.h"
+#include "color_me_less.h"
+#include "wooden_sticks.h"
+#include "sort.h"
 
 void problemFactory(const int type) {
     switch (type) {
@@ -71,16 +75,26 @@ void problemFactory(const int type) {
             undercut();
             break;
         case 15:
-            enigma();
+            enigma(); // segment fault
+            break;
+        case 16:
+            gridland();
+            break;
+        case 17:
+            color_me_less();
+            break;
+        case 18:
+            wooden_sticks();
             break;
         default:
-            enigma();
+            wooden_sticks();
             break;
     }
 }
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    problemFactory(3000);
+    problemFactory(4);
+//    testSort();
     return 0;
 }

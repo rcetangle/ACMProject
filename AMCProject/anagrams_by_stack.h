@@ -144,6 +144,45 @@ void method4(const char* source, const char* target) {
     free(tmpStack);
 }
 
+void trashNDfS(const char* source, const char* target) {
+    STACK* sourceStack = createStack(1);
+    STACK* targetStack = createStack(0);
+    int tIdx = 0;
+    while(target[tIdx] != '\0') {
+        stackPush(targetStack, target[tIdx++]);
+    }
+    STACK* tmpStack = createStack(0);
+    int sIdx = 0;
+    char ret[MAX_CNT];
+    memset(ret, '\0', sizeof(char)*MAX_CNT);
+    int retLen = 0;
+    while (source[sIdx] != '\0') {
+        char c = source[sIdx];
+        char tc = stackPop(targetStack);
+        if (c == tc) {
+            stackPush(sourceStack, c);
+            sIdx++;
+        } else if (tc != '\0') {
+            stackPush(tmpStack, tc);
+        } else {
+            while (0 == isStackEmpty(sourceStack) && stackReadTop(tmpStack) != stackReadTop(sourceStack)) {
+                ret[retLen++] = stackPop(sourceStack);
+            }
+            stackPush(sourceStack, c);
+            sIdx++;
+            stackPop(tmpStack);
+        }
+    }
+    while (0 == isStackEmpty(sourceStack)) {
+        ret[retLen++] = stackPop(sourceStack);
+    }
+    
+    printf("    ret4: %s\n", ret);
+    free(sourceStack);
+    free(targetStack);
+    free(tmpStack);
+}
+
 void anagrams_by_stack() {
 #ifdef PRINT_FLAG
     printf("problem anagrams by stack problemCode=1004\n");
@@ -153,10 +192,11 @@ void anagrams_by_stack() {
     char target[MAX_CNT];
     while(EOF != scanf("%s\n%s", source, target)) {
         printf("[\n");
-        method4(source, target);
-        method3(source, target);
-        method1(source, target);
-        method2(source, target);
+        trashNDfS(source, target);
+//        method4(source, target);
+//        method3(source, target);
+//        method1(source, target);
+//        method2(source, target);
         printf("]\n");
     }
 }

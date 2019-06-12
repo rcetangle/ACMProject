@@ -25,6 +25,29 @@
 /* Begin PBXFileReference section */
 		812BA1B221CE1F23007BFA9A /* AMCProject */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AMCProject; sourceTree = BUILT_PRODUCTS_DIR; };
 		812BA1B521CE1F23007BFA9A /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		812BA1BC21CE1F4D007BFA9A /* a_plus_b.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = a_plus_b.h; sourceTree = "<group>"; };
+		8140AAEE221C0071003AE749 /* crashing_ballon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = crashing_ballon.h; sourceTree = "<group>"; };
+		815CA7C122154CDB0067D23D /* html.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = html.h; sourceTree = "<group>"; };
+		8163B2F322364413006A47FA /* gridland.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gridland.h; sourceTree = "<group>"; };
+		8175BE132228DEDC00FB21FC /* numberical_summation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = numberical_summation.h; sourceTree = "<group>"; };
+		8175BE1722293C5700FB21FC /* gnome_tetravex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gnome_tetravex.h; sourceTree = "<group>"; };
+		818C4D09223112DD0076E888 /* system_overload.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = system_overload.h; sourceTree = "<group>"; };
+		818C4D0A2231289B0076E888 /* trees_made_2_order.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = trees_made_2_order.h; sourceTree = "<group>"; };
+		818C4D0E223245220076E888 /* fire_net.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fire_net.h; sourceTree = "<group>"; };
+		8194D73A22422F0200EF0EFC /* houseboat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = houseboat.h; sourceTree = "<group>"; };
+		8194D73B22423FEC00EF0EFC /* hangover.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hangover.h; sourceTree = "<group>"; };
+		8194D73C224246D200EF0EFC /* undercut.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = undercut.h; sourceTree = "<group>"; };
+		8194D7412243614400EF0EFC /* enigma.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = enigma.h; sourceTree = "<group>"; };
+		81BEFD5422253D6100C18FF9 /* anagrams_by_stack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = anagrams_by_stack.h; sourceTree = "<group>"; };
+		81BEFD552225401200C18FF9 /* stack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stack.h; sourceTree = "<group>"; };
+		81C2605B225481C600365878 /* test.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = test.in; sourceTree = "<group>"; };
+		81C260642254ACD700365878 /* color_me_less.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = color_me_less.h; sourceTree = "<group>"; };
+		81C2606B2254C40900365878 /* wooden_sticks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wooden_sticks.h; sourceTree = "<group>"; };
+		81C2606C2255A2EF00365878 /* sort.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sort.h; sourceTree = "<group>"; };
+		81E91E5122278E8200378B67 /* jugs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = jugs.h; sourceTree = "<group>"; };
+		81E91E532227BA5A00378B67 /* main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
+		81E91E542227C55800378B67 /* do_the_untwist.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = do_the_untwist.h; sourceTree = "<group>"; };
+		81FCA5D52243A87900C15302 /* link_list.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = link_list.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +80,30 @@
 		812BA1B421CE1F23007BFA9A /* AMCProject */ = {
 			isa = PBXGroup;
 			children = (
+				81E91E532227BA5A00378B67 /* main.h */,
+				8175BE132228DEDC00FB21FC /* numberical_summation.h */,
 				812BA1B521CE1F23007BFA9A /* main.c */,
+				818C4D0A2231289B0076E888 /* trees_made_2_order.h */,
+				818C4D0E223245220076E888 /* fire_net.h */,
+				8163B2F322364413006A47FA /* gridland.h */,
+				81C260642254ACD700365878 /* color_me_less.h */,
+				81C2606B2254C40900365878 /* wooden_sticks.h */,
+				8194D73A22422F0200EF0EFC /* houseboat.h */,
+				8194D73C224246D200EF0EFC /* undercut.h */,
+				8194D73B22423FEC00EF0EFC /* hangover.h */,
+				812BA1BC21CE1F4D007BFA9A /* a_plus_b.h */,
+				815CA7C122154CDB0067D23D /* html.h */,
+				8140AAEE221C0071003AE749 /* crashing_ballon.h */,
+				81BEFD5422253D6100C18FF9 /* anagrams_by_stack.h */,
+				81BEFD552225401200C18FF9 /* stack.h */,
+				8175BE1722293C5700FB21FC /* gnome_tetravex.h */,
+				81E91E5122278E8200378B67 /* jugs.h */,
+				81E91E542227C55800378B67 /* do_the_untwist.h */,
+				818C4D09223112DD0076E888 /* system_overload.h */,
+				8194D7412243614400EF0EFC /* enigma.h */,
+				81FCA5D52243A87900C15302 /* link_list.h */,
+				81C2605B225481C600365878 /* test.in */,
+				81C2606C2255A2EF00365878 /* sort.h */,
 			);
 			path = AMCProject;
 			sourceTree = "<group>";

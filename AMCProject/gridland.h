@@ -9,28 +9,28 @@
 #ifndef gridland_h
 #define gridland_h
 
-typedef struct graph {
-    
-} Graph;
-
 void gridland() {
 #ifdef PRINT_FLAG
     printf("problem Gridland problemCode=1037\n");
     printf("please input an int:\n");
 #endif
-    int cnt;
-    while(scanf("%d", &cnt) != EOF && cnt <= 0) {
+    freopen("/Users/ios/Documents/Anice/AMCProject/AMCProject/test.in","r",stdin);
+    int cnt = 0;
+    while(scanf("%d", &cnt) != EOF && cnt > 0) {
         int i;
-        for (i = 0; i < cnt; cnt++) {
+        for (i = 0; i < cnt; i++) {
 #ifdef PRINT_FLAG
-            printf("Scenario #%d input the grid dimensions(1~50): ", i+1);
+            printf("Scenario #%d input the grid dimensions(1~50): \n", i+1);
 #endif
             int m, n;
-            scanf("%d %d", m, n);
-            int* grid = (int*)malloc(sizeof(int)*m*n);
-            int j;
-            for (j = 0; j < m*n; j++)
-                grid[j] = 1;
+            scanf("%d %d", &m, &n);
+            float ret = 0;
+            if (m%2 != 0 && n%2 != 0) {
+                ret = m*n-1+sqrt(2);
+            } else {
+                ret = m*n;
+            }
+            printf("Scenario #%d:\n%.2f\n\n", i+1, ret);
         }
     }
 }

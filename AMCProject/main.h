@@ -19,8 +19,7 @@ int mem_cnt = 0;
 void * safe_malloc(size_t size)
 {
     void * mem = malloc(size);
-    if(mem)
-    {
+    if(mem) {
         mem_cnt++;
     }
     return mem;
